@@ -1,12 +1,20 @@
 import { useSelector } from 'react-redux';
 import { Route, Routes } from 'react-router-dom';
+import {useEffect} from 'react'
+import { useMoralis } from 'react-moralis';
 
 import { Searchbar, Sidebar, MusicPlayer, TopPlay } from './components';
 import { ArtistDetails, TopArtists, AroundYou, Discover, Search, SongDetails, TopCharts } from './pages';
+import UploadMusic from './pages/UploadMusic';
 
 const App = () => {
   const { activeSong } = useSelector((state) => state.player);
-
+  const {isWeb3Enabled, enableWeb3} = useMoralis()
+  useEffect(() => {
+    if(!isWeb3Enabled){
+      enableWeb3()
+    }
+  }, [])
   return (
     <div className="relative flex">
       <Sidebar />
@@ -20,9 +28,11 @@ const App = () => {
               <Route path="/top-artists" element={<TopArtists />} />
               <Route path="/top-charts" element={<TopCharts />} />
               <Route path="/around-you" element={<AroundYou />} />
+              <Route path='/upload' element = {<UploadMusic  />}      />
               <Route path="/artists/:id" element={<ArtistDetails />} />
               <Route path="/songs/:songid" element={<SongDetails />} />
               <Route path="/search/:searchTerm" element={<Search />} />
+              
             </Routes>
           </div>
           <div className="xl:sticky relative top-0 h-fit">

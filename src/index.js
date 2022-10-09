@@ -6,15 +6,23 @@ import * as serviceWorkerRegistration from './serviceWorkerRegistration';
 import {Provider} from 'react-redux'
 import { store } from './redux/store'
 import {BrowserRouter as Router} from 'react-router-dom'
+import {MoralisProvider} from 'react-moralis'
+import {ApolloProvider} from '@apollo/client'
+import { apolloClient } from './graphql/apolo/apoloClient';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <React.StrictMode>
     <Provider store={store}>
+    <MoralisProvider appId="IJhM2iOMPsr9DBMdVIW2Sm1oYDlr8y6qJbVzp79D" serverUrl="https://xgctflxeycdz.usemoralis.com:2053/server">
       <Router>
-    <App />
+      <ApolloProvider client={apolloClient}>
+      <App />
+    </ApolloProvider>
     </Router>
+    </MoralisProvider>
     </Provider>
+    
   </React.StrictMode>
 );
 
