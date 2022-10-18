@@ -41,3 +41,16 @@
   -ms-overflow-style: none; /* IE and Edge */
   scrollbar-width: none; /* Firefox */
 }
+
+.artist_bg {
+  background: #CE5937;
+  background: -moz-radial-gradient(center, #CE5937 0%, #4345A4 100%, #C5632B 100%);
+  background: -webkit-radial-gradient(center, #CE5937 0%, #4345A4 100%, #C5632B 100%);
+  background: radial-gradient(ellipse at center, #CE5937 0%, #4345A4 100%, #C5632B 100%);
+ 
+}
+
+ .album_bg{
+  background: rgb(47,21,17);
+background: radial-gradient(circle, rgba(47,21,17,1) 10%, rgba(90,34,21,1) 25%, rgba(22,21,79,1) 100%);
+ }

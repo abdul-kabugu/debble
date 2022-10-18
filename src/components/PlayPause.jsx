@@ -5,7 +5,7 @@ const PlayPause = ({isPlaying, song,  activeSong, i , handlePlay, handlePause}) 
 
  return(
   <div>
-    {isPlaying && activeSong.id === song.id ? (
+    {(isPlaying && activeSong.id === song.id)? (
       <FaPauseCircle size={35} className="text-gray-300 cursor-pointer"
         onClick={ handlePause}
       />

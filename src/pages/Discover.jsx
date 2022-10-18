@@ -6,9 +6,8 @@ const Discover = () => {
     const dispatch = useDispatch()
     const {activeSong, isPlaying} = useSelector((state) => state.player )
     const {songs, isSongsError, isSongsLoading} = useDiscoverSongs()
-
-     console.log("the returned songs", songs)
-     console.log("the currently  active song", activeSong)
+      console.log("the  discover  gallery", songs)
+     
      if(isSongsLoading ){
         return (
           <h1 className='text-white'>I'm loadiiing</h1>

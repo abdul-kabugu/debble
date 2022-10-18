@@ -8,7 +8,7 @@ import {
   } from '@apollo/client';
   
   import { onError}  from '@apollo/client/link/error'
-  const API_URL = 'https://api-mumbai.lens.dev';
+  const API_URL =   'https://api-mumbai.lens.dev'     //'https://api-sandbox-mumbai.lens.dev'   
   
   // Log any GraphQL errors or network error that occurred
   const errorLink = onError(({ graphQLErrors, networkError }) => {

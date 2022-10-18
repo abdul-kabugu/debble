@@ -19,10 +19,10 @@ const Player = ({ activeSong, isPlaying, volume, seekTime, onEnded, onTimeUpdate
   useEffect(() => {
     ref.current.currentTime = seekTime;
   }, [seekTime]);
-
+//activeSong?.metadata?.media[0].original?.url ? activeSong?.metadata?.media[0].original?.url : activeSong?.original.url    
   return (
     <audio
-      src={activeSong?.metadata.media[0].original?.url}
+      src={activeSong?.metadata?.media[0].original.url || activeSong?.original?.url   }
       ref={ref}
       loop={repeat}
       onEnded={onEnded}

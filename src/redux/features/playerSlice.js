@@ -20,8 +20,13 @@ const playerSlice = createSlice({
         state.currentSongs = action.payload.data.tracks.hits;
       } else if (action.payload?.data?.properties) {
         state.currentSongs = action.payload?.data?.tracks;
-      } else {
-        state.currentSongs = action.payload.data.explorePublications?.items ;
+      }else if(action.payload?.data.publication?.media        ){
+        state.currentSongs = action.payload.publication?.media ;
+      }
+       else  {
+        state.currentSongs = action.payload.data.explorePublications?.items
+        //state.currentSongs = action.payload.publication?.media ;
+         //state.currentSongs = action.payload.data
       }
 
       state.currentIndex = action.payload.i;

@@ -6,7 +6,7 @@ export const useDiscoverSongs = (tags) => {
     const {data :songs , loading : isSongsLoading, error: isSongsError} = useQuery(DISCOVER_SONGS, {
         variables : {
             request : {
-                "sortCriteria": "TOP_COLLECTED",
+                "sortCriteria":   "LATEST",  //"TOP_COLLECTED",
                 "publicationTypes": ["POST", "MIRROR"],
                 "sources": ["audios"], 
 
