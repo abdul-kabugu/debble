@@ -7,6 +7,7 @@ import {GET_ARTIST_SONGS} from '../../graphql/query/getArtistSongs'
             request : {
                 "profileId": id,
                 "publicationTypes": ["POST",  "MIRROR"],
+                 
                 "sources": ["audios"]
             }
         }

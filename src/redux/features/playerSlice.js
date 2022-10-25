@@ -7,6 +7,7 @@ const initialState = {
   isPlaying: false,
   activeSong: {},
   genreListId: '',
+  activeAlbumId : ''
 };
 
 const playerSlice = createSlice({
@@ -31,6 +32,7 @@ const playerSlice = createSlice({
 
       state.currentIndex = action.payload.i;
       state.isActive = true;
+      state.activeAlbumId = action.payload.albumID
     },
 
     nextSong: (state, action) => {

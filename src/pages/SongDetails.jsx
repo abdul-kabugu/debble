@@ -1,30 +1,32 @@
   import {useParams} from 'react-router-dom'
-  import {DetailsHeader, RelatedSongs} from '../components'
+  import {DetailsHeader, Modal, RelatedSongs} from '../components'
   import {useSelector, useDispatch} from 'react-redux'
   import {setActiveSong, playPause} from "../redux/features/playerSlice"
-  import {useGetSongDetails, useGetSongRevenue, useDiscoverSongs, useGetLatestSongs} from '../hooks/useLens'
-  
+  import {useGetSongDetails, useGetSongRevenue, useDiscoverSongs, useGetLatestSongs, useCollect} from '../hooks/useLens' 
 import PlayPause from '../components/PlayPause'
 import TrackBar from '../components/TrackBar'
+import { useQuery } from '@apollo/client'
+import { TEST_GET_PUB } from '../graphql/query/testgetsongs'
+
+
   
-const SongDetails = () => {
+const SongDetails = ({firstUserId, defaultProfile}) => {
+ 
+
      const {songid} = useParams()
+
+      const {data: testingData} = useQuery(TEST_GET_PUB)
+
+      
      const dispatch = useDispatch()
      const {activeSong, isPlaying} = useSelector((state) => state.player)
 
          const { latestSongs, isLatestSongsLoading, isLatestSongsError} = useGetLatestSongs()
-        const { songs}  = useDiscoverSongs()
-      const {songRevenueStats, isSongReveneuStatsLoading, isSongRevenueStatsError} = useGetSongRevenue(songid)
-
-      const {songDetail, isSongDetailsLoading, isSongDetailsError} = useGetSongDetails(songid)
-      
-       //const {testing} = useTest(songid)
-
-         console.log("testing  info", songs)
-         console.log("the song details", songDetail)
-     
-     const artistId = songDetail?.publication.profile.id
-     
+        const {songRevenueStats, isSongReveneuStatsLoading, isSongRevenueStatsError} = useGetSongRevenue(songid)
+       const {songDetail, isSongDetailsLoading, isSongDetailsError} = useGetSongDetails(songid)
+        const {collect} = useCollect()
+       const artistId = songDetail?.publication.profile.id
+        
      const handlePauseClick = () => {
       dispatch(playPause(false))
      }
@@ -34,11 +36,22 @@ const SongDetails = () => {
         dispatch(playPause(true))
      }
 
-        
+       if(isLatestSongsLoading || isSongReveneuStatsLoading || isSongDetailsLoading){
+        return(
+          <h3 className='text-white'>Some info is still loading</h3>
+        )
+       } 
+
+       if(isLatestSongsError || isSongDetailsError || isSongRevenueStatsError){
+        return(
+          <div className='w-full h-screen flex items-center justify-center'>
+             <h1 className='text-white font-semibold text-3xl'>Something went wrong please refresh </h1>
+          </div>
+       )}
      return(
     <div className='flex flex-col'>
-   <DetailsHeader song ={songDetail} />
-
+   <DetailsHeader song ={songDetail} defaultProfile = {defaultProfile} firstUserId = {firstUserId}/>
+   
     <div className='mb-6'>
       <h1 className='text-white text-2xl font-bold mt-3' >Tracks</h1>
 

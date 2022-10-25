@@ -1,9 +1,10 @@
 import {gql} from '@apollo/client'
 
-export const TEST_GET_PUB = gql`
-   
-query Publication($request : PublicationQueryRequest!) {
-  publication(request: $request) {
+export const TEST_GET_PUB = gql `
+query Publication {
+  publication(request: {
+    publicationId: "0x41cd-0x6e"
+  }) {
    __typename 
     ... on Post {
       ...PostFields
@@ -86,7 +87,6 @@ fragment PublicationStatsFields on PublicationStats {
   totalAmountOfMirrors
   totalAmountOfCollects
   totalAmountOfComments
-  totalUpvotes
 }
 
 fragment MetadataOutputFields on MetadataOutput {
@@ -114,20 +114,6 @@ fragment Erc20Fields on Erc20 {
 
 fragment PostFields on Post {
   id
-  collectedBy {
-      address
-      defaultProfile {
-        name
-        handle
-        picture {
-          ... on MediaSet {
-            original {
-              url
-            }
-          }
-        }
-      }
-    }
   profile {
     ...ProfileFields
   }
@@ -356,5 +342,6 @@ fragment ReferenceModuleFields on ReferenceModule {
     degreesOfSeparation
   }
 }
-     
+
+
 `

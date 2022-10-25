@@ -210,7 +210,7 @@ const getPostRefrenceModule = () => {
          <div className='flex items-center justify-center flex-col  mb-1'>
         <h1 className='text-2xl text-white font-medium' >Upload New Album</h1>
         
-        {getDemoAuth()}
+        {/*getDemoAuth()*/}
          
       </div>
       <div className='flex flex-col items-center justify-center  '>

@@ -1,11 +1,11 @@
 import {FaPlayCircle, FaPauseCircle} from 'react-icons/fa'
 
-const PlayPause = ({isPlaying, song,  activeSong, i , handlePlay, handlePause}) =>{
+const PlayListPlayPause = ({isPlaying, song,  activeSong, i , handlePlay, handlePause, albumId, activeAlbum }) =>{
 
 
  return(
   <div>
-    {(isPlaying && activeSong?.id === song?.id) ? (
+    {(isPlaying && activeAlbum === albumId) ? (
       <FaPauseCircle size={35} className="text-gray-300 cursor-pointer"
         onClick={ handlePause}
       />
@@ -19,4 +19,4 @@ const PlayPause = ({isPlaying, song,  activeSong, i , handlePlay, handlePause}) 
   </div>
  )
  }
-export default PlayPause;
+export default PlayListPlayPause;

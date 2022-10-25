@@ -1,17 +1,34 @@
-import { useGetArtistSongs, useGetArtistProfile } from "../hooks/useLens";
+import { useGetArtistSongs, useGetArtistProfile, useTest, useFollow } from "../hooks/useLens";
 import {useParams} from 'react-router-dom'
  import { FiUsers } from 'react-icons/fi'
 import { truncateString } from "../hooks/useSubString";
 import { AlbumCard } from "../components";
+import {useQuery} from '@apollo/client'
+import { TEST_GET_PUB } from "../graphql/query/testgetsongs";
 
 
 const ArtistDetails = () => {
-   
+     
+     
    const {id} = useParams()
   const {artistSongs, isGetArtistSongsLoading, isGetArtistSongsError} = useGetArtistSongs(id)
    const {artistProfile, isArtistProfileLoading, isArtistProfileError} = useGetArtistProfile(id)
-   console.log("the artist  Profile", artistProfile)
-   console.log("the artist  songs",  artistSongs)
+   const {follow} = useFollow()
+    const USER_ID = artistProfile?.profile?.id
+   
+       if (isGetArtistSongsLoading || isArtistProfileLoading) {
+        return(
+          <h3 className="text-white">Some Info is loading</h3>
+        )
+       }
+
+       if(isArtistProfileError || isGetArtistSongsError){
+        return(
+          <div className='w-full h-screen flex items-center justify-center'>
+          <h1 className='text-white font-semibold text-3xl'>Something went wrong please refresh </h1>
+       </div>
+        )
+       }
    return(
   <div className="w-full">
      <div className="artist_bg">
@@ -48,7 +65,7 @@ const ArtistDetails = () => {
               </div>
 
               <div className=" w-full flex  items-end justify-end mt-4">
-               <button className=" bg-white py-2 px-8 rounded-md">Follow </button>
+               <button className=" bg-white py-2 px-8 rounded-md" onClick={() => follow(USER_ID)}>Follow </button>
               </div>
           </div>
         </div>

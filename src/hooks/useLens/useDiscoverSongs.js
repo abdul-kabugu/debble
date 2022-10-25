@@ -8,9 +8,10 @@ export const useDiscoverSongs = (tags) => {
             request : {
                 "sortCriteria":   "LATEST",  //"TOP_COLLECTED",
                 "publicationTypes": ["POST", "MIRROR"],
+                
                 "sources": ["audios"], 
 
-                  metadata : {
+                metadata : {
                     "mainContentFocus": ["AUDIO"],
                      "tags" : tags
                   }

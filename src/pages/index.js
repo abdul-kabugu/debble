@@ -5,6 +5,8 @@ import SongDetails from './SongDetails';
 import Search from './Search';
 import TopCharts from './TopCharts';
 import AroundYou from './AroundYou';
+import Settings from './Settings';
+import PlayListsDetails from './PlayListsDetails';
 
 export {
   Discover,
@@ -14,4 +16,6 @@ export {
   SongDetails,
   TopCharts,
   AroundYou,
+  Settings,
+  PlayListsDetails
 };

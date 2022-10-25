@@ -58,7 +58,7 @@ const handlePauseClick = () => {
     </div>
    )
   return(
-  <div ref={deveRef} className="xl:ml-6 ml-0 xl:mb-0 mb-6 flex-1 xl:max-w-[300px] max-w-full
+  <div ref={deveRef} className=" xl:ml-6 ml-0 xl:mb-0 mb-6 flex-1 xl:max-w-[300px] max-w-full 
    flex flex-col"
   >
     <div className="w-full flex flex-col">

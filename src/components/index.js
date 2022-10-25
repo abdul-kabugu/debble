@@ -10,6 +10,10 @@ import MusicPlayer from './MusicPlayer';
 import Loader from './Loader';
 import Error from './Error';
 import AlbumCard from './AlbumCard';
+import Authenticate from './Authenticate';
+import Modal from './Modals/Modal';
+import TrackBar from './TrackBar';
+import PlayListPlayPause from './PlayListPlayPause';
 
 export {
   TopPlay,
@@ -23,5 +27,9 @@ export {
   MusicPlayer,
   Loader,
   Error,
-  AlbumCard
+  AlbumCard,
+  Authenticate,
+  Modal,
+  TrackBar,
+  PlayListPlayPause
 };
