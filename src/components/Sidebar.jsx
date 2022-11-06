@@ -26,9 +26,9 @@ const toggleIsCreatePlaylistModal = () => {
   const {activeSong, isPlaying} = useSelector((state) => state.player)
  const {isSaving : isCreatingNewPlayList, save : createNewPlayList, error : newPlayListError} = useNewMoralisObject("PlayLists")
   const {account} = useMoralis()
-   console.log("active song from side bar", firstUserId)
-   console.log("isPlaying from side bar", isPlaying)
-   console.log("the playlist error", newPlayListError?.message)
+  // console.log("active song from side bar", firstUserId)
+  // console.log("isPlaying from side bar", isPlaying)
+  // console.log("the playlist error", newPlayListError?.message)
      const playListData = {
         "CreateBy" : account,
          "PlayListName" : playListName,
@@ -37,7 +37,7 @@ const toggleIsCreatePlaylistModal = () => {
      }
 
 const NavLinks = ({handleClick}) => (
-  <div className='mt-10'>
+  <div className='mt-4'>
     {links.map((link, i) => {
 
       return(
@@ -102,12 +102,12 @@ const NavLinks = ({handleClick}) => (
   </div> 
   </Modal>}
  <div className='hidden md:flex flex-col w-[240px] py-10 px-4
-  bg-black 
+  bg-black overflow-y-scroll hide-scrollbar 
  '>
   <BiMusic  className='text-white w-full' size={50}/>
   <NavLinks  />
 
-  <div className='mt-4'>
+  <div className='mt-1 '>
     <Authenticate  firstUserId = {firstUserId} defaultProfile = {defaultProfile} />
      
    </div>

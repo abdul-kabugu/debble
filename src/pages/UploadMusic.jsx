@@ -17,7 +17,7 @@ export default function UploadMusic() {
   const [colectModule, setcolectModule] = useState("FreeCollectModule")
   const [isCollectFee, setisCollectFee] = useState(false)
   const [isLimiteCollectFee, setisLimiteCollectFee] = useState(false)
-  const [selectedCurrency, setselectedCurrency] = useState("")
+  const [selectedCurrency, setselectedCurrency] = useState("0x9c3C9283D3e44854697Cd22D3Faa240Cfb032889")  
   const [dropPrice, setdropPrice] = useState("")
   const [refferlFee, setrefferalFee] = useState("")
   const [collectRules, setcollectRules] = useState(false)

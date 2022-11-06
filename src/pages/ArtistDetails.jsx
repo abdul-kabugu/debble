@@ -79,7 +79,7 @@ const ArtistDetails = () => {
             return(
               <div>
              
-              <AlbumCard 
+              <AlbumCard key={i}
                song = {song}
                i = {i}
               data = {artistSongs}

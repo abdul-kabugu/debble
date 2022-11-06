@@ -11,8 +11,12 @@ import { useGetDispatcher, useEnableDispatch } from '../hooks/useLens'
  
 
 export default function Authenticate({ firstUserId , defaultProfile }) {
-     const {account, authenticate, isAuthenticated, isAuthenticating} = useMoralis()
+     const {account, authenticate, isAuthenticated, isAuthenticating, Moralis, logout} = useMoralis()
       const {signIn} = useSignIn()
+        const logIn = async () => {
+              await Moralis.enableWeb3()
+               await signIn()
+        }
       const [isExpandProfile, setIsExpandProfile] = useState(false)
       const [isConnectWalletModal, setisConnectWalletModal] = useState(false)
       const [isLensConnectModal, setisLensConnectModal] = useState(false)
@@ -68,18 +72,18 @@ export default function Authenticate({ firstUserId , defaultProfile }) {
         }
       const UserProfile = () => {
         return(
-            <div className='max-w-[200px]   flex-col p-2 animate-slideup absolute z-10  '>
-                <div className='flex items-center py-4 '>
+            <div className='max-w-[200px]   flex-col p-2 animate-slideup absolute z-10  h-[100px] overflow-y-scroll hide-scrollbar '>
+                <div className='flex items-center py-2 '>
                    <AiOutlineUser  size={26} className="text-white"/>
                    <Link to={`/artists/${defaultProfile ? defaultProfile?.id : firstUserId?.id}`}><h3 className='text-white font-semibold ml-6'>Your Profile</h3>  </Link>
                    </div>
-                   <div className='flex items-center  py-4 '>
+                   <div className='flex items-center  py-2 '>
                    <AiOutlineSetting  size={23} className="text-white"/>
                    <Link to={`/settings`}><h3 className='text-white font-semibold ml-6'>Settings</h3>  </Link>
                     </div>
-                    <div className='flex items-center  py-4  cursor-pointer '> 
+                    <div className='flex items-center  py-2  cursor-pointer '> 
                    <FaSignOutAlt   size={20} className="text-white"/>
-                   <h3 className='text-white font-semibold ml-6'>Log out</h3> 
+                   <h3 className='text-white font-semibold ml-6' onClick={logout}>Log out</h3> 
                     </div> 
                 </div>
         
@@ -91,15 +95,15 @@ export default function Authenticate({ firstUserId , defaultProfile }) {
         
 
        const getCurrentAuthState = () => {
-         if(!isAuthenticated && !account){
+         if(!isAuthenticated ){
            return(
             <ConnectWallet  />
            )
-         }else if(isAuthenticated && account  && LENS_ACCESS_TOKEN == null){
+         }else if(isAuthenticated   && LENS_ACCESS_TOKEN == null){
            return(
             <LensConnect  />
            )
-         }else if(isAuthenticated && account && LENS_ACCESS_TOKEN !== null){
+         }else if(isAuthenticated  && LENS_ACCESS_TOKEN !== null){
            return(
             <BasicUserProfile  />
            )
@@ -107,7 +111,7 @@ export default function Authenticate({ firstUserId , defaultProfile }) {
        }
 
   return (
-    <div>
+    <div className='overflow-y-scroll hide-scrollbar'>
      {getCurrentAuthState()}
       
     
@@ -169,7 +173,7 @@ export default function Authenticate({ firstUserId , defaultProfile }) {
             </div>
 
             <div className='flex items-center justify-end'>
-               <button className='bg-white text-black capitalize py-2 w-[150px] px-6 rounded-lg ' onClick={signIn}>sign-in</button>
+               <button className='bg-white text-black capitalize py-2 w-[150px] px-6 rounded-lg ' onClick={logIn}>sign-in</button>
             </div>
         </div>
     

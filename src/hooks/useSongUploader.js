@@ -5,6 +5,7 @@ import {signText, signedTypeData, splitSignature} from '../utils/ether-service'
 import {v4 as uuidv4} from 'uuid'
 import { useMoralis,  useMoralisFile} from 'react-moralis'
 import { lensHub } from '../utils/lens-hub'
+import { useGetUserProfiles } from './useLens'
 
 
 const CREATE_POST_TYPED_DATA = `
@@ -54,7 +55,10 @@ const createPostTypedData = (createPostTypedDataRequest) => {
 const  useSongUploader = () => {
     const {saveFile, isUploading, moralisFile, error: uploadingError} = useMoralisFile()
   const {account, isInitialized, isAuthenticated, Moralis, user} = useMoralis()
-  const  thePrfId =  "0x41cd"                      //user?.attributes.lensProfileId
+  const {userProfiles, isUserProfilesLoading, isUserProfileError} = useGetUserProfiles()
+  const FIRST_USER_ID = userProfiles?.profiles?.items[0] 
+  const  thePrfId =  FIRST_USER_ID?.id
+             //"0x41cd"   ||  //user?.attributes.lensProfileId
    
   const {signIn} = useSignIn()
   const uploadSong = async (description,albumName, tags, trackCover, media,  getPostModules, getPostRefrenceModule) => {
@@ -101,7 +105,7 @@ const  useSongUploader = () => {
           )
         console.log("post ipfs hash", ipfsResult._ipfs)
 
-      
+          await Moralis.enableWeb3()
 
         const createPostRequest = {
             profileId: thePrfId,

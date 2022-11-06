@@ -47,12 +47,15 @@ export const lensAuthenticate = async (address, signature) => {
     };
     
 const useSignIn  = () => {
-    const {account, isAuthenticated} = useMoralis()
+    const { isAuthenticated, Moralis, user} = useMoralis()
+       const account = user?.attributes?.ethAddress
      const signIn = async() => {
+      
       try {
-        if (!account || !isAuthenticated) {
+        if (!isAuthenticated) {
           return alert('Please connect your wallet first');
         }
+       
         // generate  challenge 
         const challenge = await generateChallenge(account);
         //  sign  genereted  challenge

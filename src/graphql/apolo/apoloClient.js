@@ -10,6 +10,19 @@ import {
   import { onError}  from '@apollo/client/link/error'
   const API_URL =   'https://api-mumbai.lens.dev/'   //'https://api-sandbox-mumbai.lens.dev'     
   
+       //  DEFAULT_OPTIONS   
+
+    const defaultOptions = {
+      watchQuery: {
+        fetchPolicy: 'no-cache',
+        errorPolicy: 'ignore',
+      },
+      query: {
+        fetchPolicy: 'no-cache',
+        errorPolicy: 'all',
+      },
+    }
+
   // Log any GraphQL errors or network error that occurred
   const errorLink = onError(({ graphQLErrors, networkError }) => {
     if (graphQLErrors)
@@ -42,7 +55,7 @@ import {
   export const apolloClient = new ApolloClient({
     link: authLink.concat(httpLink),
     cache: new InMemoryCache(),
-  
+    defaultOptions : defaultOptions
     
   
   });

@@ -12,26 +12,27 @@ import UserPlayLists from './pages/UserPlayLists';
 
 const App = () => {
   const { activeSong } = useSelector((state) => state.player);
-  const {isWeb3Enabled, enableWeb3, account} = useMoralis()
-  useEffect(() => {
+  const {isWeb3Enabled, enableWeb3, account, user, isAuthenticated} = useMoralis()
+  /*useEffect(() => {
     if(!isWeb3Enabled){
       enableWeb3()
     }
-  }, [])
+  }, [])*/
 
   //GET_LATEST  SONGS 
    const {latestSongs, isLatestSongsError, isLatestSongsLoading} = useGetLatestSongs()
 
      // USER_PROFILES
-     const {userProfiles, isUserProfilesLoading, isUserProfileError} = useGetUserProfiles(account)
+     const {userProfiles, isUserProfilesLoading, isUserProfileError} = useGetUserProfiles()
       // DEFAULT  USER  PROFILES 
-     const {data, loading, error} = useGetDefaultId(account)
+      ///console.log("the user", user?.attributes?.ethAddress)
+       const {data, loading, error} = useGetDefaultId()
     
        
        const FIRST_USER_ID = userProfiles?.profiles?.items[0]
         const DEFAULT_USER_ID = data?.defaultProfile
 
-          console.log("the first user id", FIRST_USER_ID)
+          console.log("the first user id", FIRST_USER_ID?.id)
           console.log("the current user account", account)
        
   return (

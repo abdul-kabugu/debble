@@ -16,11 +16,13 @@ const createCollectTypedData = (createCollectTypedDataRequest) => {
   };
 
   export const useCollect = () => {
-    const {account} = useMoralis()
+    const {Moralis, user} = useMoralis()
+    const account = user?.attributes?.ethAddress
     const collect = async (postId, profileId) => {
         if(!profileId){
             alert("connect  your  profile first")
          }
+         await Moralis.enableWeb3()
          const collectRequest = {
             publicationId: postId,
          }

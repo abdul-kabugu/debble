@@ -15,11 +15,12 @@ const createMirrorTypedData = (createMirrorTypedDataRequest) => {
   };
 
    export const useMirror = () => {
+    const {Moralis} = useMoralis()
       const mirror = async (postId, profileId) => {
         if(!profileId){
             alert("connect  your  profile first")
          }
-
+         await Moralis.enableWeb3()
          const createMirrorRequest = {
             profileId : profileId,
             publicationId: postId,

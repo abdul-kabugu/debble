@@ -2,14 +2,15 @@ import {Link } from 'react-router-dom'
 import { truncateString } from '../hooks/useSubString';
 import { MdOutlineCollections } from 'react-icons/md'
 import { IoLogoUsd } from 'react-icons/io'
+import { BiTime } from 'react-icons/bi'
 import { useState } from 'react';
 import Modal from './Modals/Modal';
-import { AiOutlineClose, AiOutlineFileAdd } from 'react-icons/ai';
+import { AiOutlineClose, AiOutlineFileAdd, AiOutlineUser } from 'react-icons/ai';
 import { GiLoveSong } from 'react-icons/gi';
 import { useCollect, useMirror } from '../hooks/useLens';
+import moment from 'moment'
 
-
-const DetailsHeader = ({song, defaultProfile, firstUserId }) => {
+const DetailsHeader = ({song, defaultProfile, firstUserId, songRevenueStats }) => {
   const [isCollectModal, setisCollectModal] = useState(false)
 
   const toggleIsCollectModal = () => {
@@ -38,12 +39,41 @@ const DetailsHeader = ({song, defaultProfile, firstUserId }) => {
         return (
           <h3>Limited timed collect</h3>
        )
-      }else if(song?.publication?.collectModule.__typename === "imedFeeCollectModuleSettings"){
+      }else if(song?.publication?.collectModule.__typename === "TimedFeeCollectModuleSettings"){
         return (
           <h3>Limited time collect</h3>
        )
       }
     }
+
+      const getSymbol  =  () =>  {
+        if(songRevenueStats?.publicationRevenue?.revenue?.total?.asset?.symbol === "WMATIC"){
+          return <div className='flex gap-2 items-center justify-center'>
+              <img src='/img/matic-2.png'  alt='matic'  className='w-[20px]'   />
+               <h5 className='text-lg font-semibold'>{songRevenueStats?.publicationRevenue?.revenue?.total?.value}</h5>
+          </div>
+        }else if (songRevenueStats?.publicationRevenue?.revenue?.total?.asset?.symbol === "WETH"){
+          return <div className='flex gap-2 items-center justify-center'>
+          <img src='/img/ethereum-2.png'  alt='eth'  className='w-[20px]'   />
+           <h5 className='text-lg font-semibold'>{songRevenueStats?.publicationRevenue?.revenue?.total?.value}</h5>
+      </div>
+        }
+
+        else if (songRevenueStats?.publicationRevenue?.revenue?.total?.asset?.symbol === "USDC"){
+          return <div className='flex gap-2 items-center justify-center'>
+          <img src='/img/usdc-coin-1.png'  alt='usdc'  className='w-[20px]'   />
+           <h5 className='text-lg font-semibold'>{songRevenueStats?.publicationRevenue?.revenue?.total?.value}</h5>
+      </div>
+        }
+        else if (songRevenueStats?.publicationRevenue?.revenue?.total?.asset?.symbol === "DAI"){
+          return <div className='flex gap-2 items-center justify-center'>
+          <img src='/img/dai-1.png'  alt='dai'  className='w-[20px]'   />
+           <h5 className='text-lg font-semibold'>{songRevenueStats?.publicationRevenue?.revenue?.total?.value}</h5>
+      </div>
+        }
+      }
+      const formattedDates = moment(song?.publication?.collectModule?.endTimestamp).format('MMMM Do YYYY, h:mm:ss a')
+      
   console.log("the song from header component", song)
   return(
   <div className='w-full  bg-gradient-to-l  from-transparent to-black h-full p-3'>
@@ -61,8 +91,12 @@ const DetailsHeader = ({song, defaultProfile, firstUserId }) => {
          <div className='mt-4'>
             <div className='flex items-center'>
               <GiLoveSong size={19}/>
-               <h3 className='ml-3 font-bold'>Post By </h3>
+               <h3 className='ml-3 font-bold'>Song By </h3>
                 <h3 className='ml-1'>{song?.publication?.profile?.handle}</h3>
+            </div>
+            <div className='flex gap-2 items-end'>
+              <AiOutlineUser size={19} />
+            <p className='mt-4 text-white/60'>Recipient : {song?.publication && truncateString(song.publication.collectModule.recipient, 16)}</p>
             </div>
              <p className='mt-4 text-white/40'>{song?.publication && truncateString(song?.publication?.metadata.content, 16)}</p>
              <div className='mt-4 flex items-center justify-end'>
@@ -106,13 +140,26 @@ const DetailsHeader = ({song, defaultProfile, firstUserId }) => {
        </div>
 
        <div className='my-5'>
+        { song?.publication?.collectModule.__typename === "LimitedTimedFeeCollectModuleSettings" ||
+         song?.publication?.collectModule.__typename === "TimedFeeCollectModuleSettings" ?
+          
+       <div className='flex items-center my-5'>
+          <BiTime  size={26} 
+            className="text-white"
+          />
+           <h3 className='text-white font-semibold text-lg mx-4 capitalize'>end time :</h3>
+
+           <p className='text-white'>{formattedDates}</p>
+            
+        </div>
+ : ""}
         <div className='flex items-center'>
           <IoLogoUsd  size={26} 
             className="text-white"
           />
            <h3 className='text-white font-semibold text-lg mx-4 capitalize'>total revenue :</h3>
 
-           <p className='text-white'>---</p>
+           <div className='text-white'>{getSymbol() || "---"}</div>
             
         </div>
 
@@ -122,22 +169,22 @@ const DetailsHeader = ({song, defaultProfile, firstUserId }) => {
         <div className='flex flex-wrap '>
          <div className='bg-white/10 w-[170px] py-3 px-4 rounded-md flex justify-between my-2 mx-2'>
           <h5 className='text-white capitalize font-semibold'>limit </h5>
-           <h3 className='text-white font-bold'>200</h3>
+           <h3 className='text-white font-bold'>{song?.publication?.collectModule?.collectLimit || "---"}</h3>
          </div>
 
          <div className='bg-white/10 w-[170px] py-3 px-4 rounded-md flex justify-between my-2 mx-2'>
           <h5 className='text-white capitalize font-semibold'>amount </h5>
-           <h3 className='text-white font-bold'>100 </h3>
+           <h3 className='text-white font-bold'>{song?.publication?.collectModule?.amount?.value || "---"}</h3>
          </div>
 
          <div className='bg-white/10 w-[170px] py-3 px-4 rounded-md flex justify-between my-2 mx-2'>
           <h5 className='text-white capitalize font-semibold'>currency </h5>
-           <h3 className='text-white font-bold'> WETH </h3>
+           <h3 className='text-white font-bold'> {song?.publication?.collectModule?.amount?.asset.symbol || "---"} </h3>
          </div>
 
          <div className='bg-white/10 w-[170px] py-3 px-4 rounded-md flex justify-between my-2 mx-2'>
           <h5 className='text-white capitalize font-semibold'>referral </h5>
-           <h3 className='text-white font-bold'> 10% </h3>
+           <h3 className='text-white font-bold'> {song?.publication?.collectModule?.referralFee}% </h3>
          </div>
 
          <div className='bg-white/10 w-[170px] py-3 px-4 rounded-md flex justify-between my-2 mx-2'>
