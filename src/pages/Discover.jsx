@@ -2,17 +2,28 @@ import {Error, SongCard, Loader} from '../components'
 import {genres} from '../assets/constants'
 import {useDiscoverSongs} from '../hooks/useLens'
 import {useSelector, useDispatch}  from 'react-redux'
+import HashLoader from 'react-spinners/HashLoader'
 const Discover = () => {
     const dispatch = useDispatch()
     const {activeSong, isPlaying} = useSelector((state) => state.player )
     const {songs, isSongsError, isSongsLoading} = useDiscoverSongs()
-      console.log("the  discover  gallery", songs)
+     // console.log("the  discover  gallery", songs)
      
      if(isSongsLoading ){
         return (
-          <h1 className='text-white'>I'm loadiiing</h1>
+          <div className='w-full h-screen flex items-center justify-center'>
+              <HashLoader color="#36d7b7" />
+            </div>
 
         )
+     }
+
+     if(isSongsError){
+      return(
+        <div className='w-full h-screen flex items-center justify-center'>
+            <h3 className='text-xl font-semibold text-white capitalize'>Something  went  wrong  please check  your  connection and try again</h3>
+        </div>
+       ) 
      }
 return(
 <div className='flex flex-col'>

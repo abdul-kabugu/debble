@@ -16,7 +16,8 @@ export default function TrackBar({song, activeSong,  data, i, isPlaying}) {
    const [isAddNewPlayList, setisAddNewPlayList] = useState(false)
    const [currentSelectedPlayList, setcurrentSelectedPlayList] = useState()
     const [arrayOfSongs, setarrayOfSongs] = useState([])
-   const {account, Moralis} = useMoralis()
+   const {user, Moralis} = useMoralis()
+    const account = user?.attributes?.ethAddress
   const {isSaving : isCreatingNewPlayList, save : createNewPlayList, error : newPlayListError} = useNewMoralisObject("PlayLists")
    const {data: userPlayList , isLoading : isUserPlayListsLoading, error : isUserPlayListError} = useMoralisQuery("PlayLists", query =>
      query.

@@ -24,7 +24,7 @@ export default function Authenticate({ firstUserId , defaultProfile }) {
         const {dispatcher, isDispatcherError, isDispatcherLoading} = useGetDispatcher(USER_ID)
          const {enableDispatch} = useEnableDispatch()
        
-           console.log("the user profile", firstUserId)
+          // console.log("the user profile", firstUserId)
       const toggleShowExpandedProfile = () => {
         isExpandProfile ? setIsExpandProfile(false) : setIsExpandProfile(true)
     }

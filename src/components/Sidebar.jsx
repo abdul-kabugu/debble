@@ -11,6 +11,7 @@ import Modal from './Modals/Modal'
 import { AiOutlineClose } from 'react-icons/ai'
 import { useNewMoralisObject, useMoralis } from 'react-moralis'
 import {useSelector} from 'react-redux'
+import HashLoader from 'react-spinners/HashLoader'
 const Sidebar = ({firstUserId, defaultProfile }) => {
 const [isMobileMenuOpen, setisMobileMenuOpen] = useState(false)
 const [isCreatePlaylistModal, setisCreatePlaylistModal] = useState(false)
@@ -22,11 +23,12 @@ const toggleIsCreatePlaylistModal = () => {
    settheTargetedSong([activeSong])
 }
 
-  console.log("the  targeted song", theTargetedSong)
+ // console.log("the  targeted song", theTargetedSong)
   const {activeSong, isPlaying} = useSelector((state) => state.player)
  const {isSaving : isCreatingNewPlayList, save : createNewPlayList, error : newPlayListError} = useNewMoralisObject("PlayLists")
-  const {account} = useMoralis()
-  // console.log("active song from side bar", firstUserId)
+  const {user} = useMoralis()
+  const account = user?.attributes?.ethAddress
+  //console.log("active song from side bar", activeSong)
   // console.log("isPlaying from side bar", isPlaying)
   // console.log("the playlist error", newPlayListError?.message)
      const playListData = {
@@ -68,6 +70,11 @@ const NavLinks = ({handleClick}) => (
   return (
  <>
   {isCreatePlaylistModal && <Modal>
+    {isCreatingNewPlayList ? 
+     <div className='w-full h-full flex items-center justify-center'>
+       <HashLoader color="#36d7b7" />
+    </div>   
+    :
    <div className='w-[360px]'>
      <div className='flex items-center justify-between  pb-3'>
       <h2>Add New Playlist</h2>
@@ -98,8 +105,8 @@ const NavLinks = ({handleClick}) => (
           {isCreatingNewPlayList && <h3>new playlist is loading</h3>}
           
       </div>
-      
-  </div> 
+       
+  </div> }
   </Modal>}
  <div className='hidden md:flex flex-col w-[240px] py-10 px-4
   bg-black overflow-y-scroll hide-scrollbar 

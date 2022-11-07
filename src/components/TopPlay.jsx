@@ -17,7 +17,7 @@ const dispatch =  useDispatch()
 const {activeSong, isPlaying}  = useSelector((state) => state.player )
 const deveRef = useRef()
 const {topArtists, isTopArtistsLoading, isTopArtistsError} = useGetTopArtists()
-  console.log("the top artists list", topArtists)
+ // console.log("the top artists list", topArtists)
   useEffect(() => {
      deveRef.current.scrollIntoView({behavior : "smooth"})
   })
@@ -29,6 +29,14 @@ const handlePauseClick = () => {
    dispatch(setActiveSong({song, data, i}))
     dispatch(playPause(true))
  }
+
+   if(isLatestSongsLoading || isTopArtistsLoading){
+    return <p ref={deveRef}></p>
+   }
+
+   if(isLatestSongsError || isTopArtistsError){
+    return <p ref={deveRef}></p>
+   }
 
    const TopChirtCard = ({song, i, handlePlay, handlePause, isPlaying, activeSong}) => (
     <div className="flex flex-row w-full items-center hover:bg-[#4c426e] py-2 p-4 rounded-lg cursor-pointer mb-2">

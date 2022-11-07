@@ -20,15 +20,15 @@ export const useHandleApproveModule = () =>  {
              
     }
   
-     console.log("the result")
-     const approveModule = async () =>  {
-        const currencies = "0x3C68CE8504087f89c640D02d133646d98e64ddd9"
+    // console.log("the result")
+     const approveModule = async (currencies, collectModule ) =>  {
+       // const currencies = "0x3C68CE8504087f89c640D02d133646d98e64ddd9"
         const generateModuleCurrencyApprovalData = await getModuleApprovalData({
             currency: currencies,
-            value: '500',
-            collectModule: "LimitedTimedFeeCollectModule",
+            value: '1000',
+            collectModule: collectModule
           });
-          console.log('approve module: result', generateModuleCurrencyApprovalData);
+         // console.log('approve module: result', generateModuleCurrencyApprovalData);
 
           const tx = await sendTx({
             to: generateModuleCurrencyApprovalData?.to,

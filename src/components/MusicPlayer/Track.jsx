@@ -23,9 +23,9 @@ const Track = ({ isPlaying, isActive, activeSong }) => {
       }
     }
     return(
-  <div className="flex-1 flex items-center justify-start">
+  <div className="hidden md:flex-1 md:flex items-center justify-start">
     <div className={`${isPlaying && isActive ? 'animate-[spin_3s_linear_infinite]' : ''} hidden sm:block h-16 w-16 mr-4`}>
-      <img src={activeSong?.metadata?.image || activeSong?.original?.cover } alt="cover art" className="rounded-full" />
+      <img src={activeSong?.metadata?.image || activeSong?.original?.cover } alt="cover art" className="rounded-full max-w-16 max-h-16 object-cover w-16 h-16 " />
     </div>
     <div className="w-[50%]">
       {getSongName()}

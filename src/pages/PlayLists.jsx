@@ -4,26 +4,28 @@ import { useMoralisQuery, useMoralis,  } from 'react-moralis'
 import { useDispatch,  useSelector} from 'react-redux'
 import { SongCard } from '../components'
 import PlayListCard from '../components/PlayListCard'
-
+import HashLoader from 'react-spinners/HashLoader'
  import {playPause, setActiveSong} from '../redux/features/playerSlice'
 export default function PlayLists() {
   const [isPublic, setisPublic] = useState(true)
      const {data, isLoading, error} = useMoralisQuery("PlayLists", query => query.equalTo("IsPublic", isPublic))
      const {activeSong, isPlaying, activeAlbumId} = useSelector((state) => state.player )
-     console.log("trending  play  lists", activeAlbumId)
-     console.log("all playlists  in app",  data)
+     //console.log("trending  play  lists", activeAlbumId)
+    /// console.log("all playlists  in app",  data)
 
        if(isLoading){
         return(
-          <div>
-            <h2>data is loading</h2>
-          </div>
+          <div className='w-full h-screen flex items-center justify-center'>
+          <HashLoader color="#36d7b7" />
+        </div>
         )
        }
 
        if(error) {
         return(
-          <h3>{error.message}</h3>
+          <div className='w-full h-screen flex items-center justify-center'>
+              <h3 className='text-xl font-semibold text-white capitalize'>Something  went  wrong  please check  your  connection and try again</h3>
+          </div>
         )
        }
   return (

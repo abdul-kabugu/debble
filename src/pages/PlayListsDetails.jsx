@@ -1,4 +1,4 @@
-import React from 'react'
+import React, {useState} from 'react'
 import {useParams} from 'react-router-dom'
 import { useMoralisQuery, useMoralis} from 'react-moralis'
 import { TrackBar } from '../components';
@@ -8,21 +8,35 @@ import { truncateString } from '../hooks/useSubString';
 import { AiOutlineHeart } from 'react-icons/ai';
 import { BsShare } from 'react-icons/bs';
 import { MdAudiotrack } from 'react-icons/md';
+import HashLoader from 'react-spinners/HashLoader'
+import {TwitterShareButton} from 'react-share'
 //import {} from '../redux/features/playerSlice'
 export default function PlayListsDetails() {
+  
   const {activeSong, isPlaying} = useSelector((state) => state.player)
   const {playListId}  =  useParams()
   const { data, error, isLoading } = useMoralisQuery("PlayLists", query => 
     query.equalTo("objectId", playListId)
   );
    
-    console.log("my active  song", activeSong)
+   // console.log("my active  song", activeSong)
 
-     if(error){
+     if(isLoading){
       return(
-        <h1>something  went  wrong</h1>
-      )
+      <div className='w-full h-screen flex items-center justify-center'>
+      <HashLoader color="#36d7b7" />
+    </div>
+     )}
+     if(error){
+      
+        return(
+          <div className='w-full h-screen flex items-center justify-center'>
+              <h3 className='text-xl font-semibold text-white capitalize'>Something  went  wrong  please check  your  connection and try again</h3>
+          </div>
+         )
+      
      }
+      const shareUrl = `http://localhost:3000/playlists/${playListId}`
   return (
     <div>
        <div className='w-full h-4/5 p-3 md:h-56  bg-gradient-to-r from-indigo-500 to-purple-400 '>
@@ -49,7 +63,9 @@ export default function PlayListsDetails() {
                     </div>
 
                     <div className='flex items-center gap-3 bg-white/30 rounded-md py-2 px-4 w-[130px] cursor-pointer'>
+                      <TwitterShareButton url={shareUrl}>
                     <BsShare size={24} className="text-white" />
+                    </TwitterShareButton>
                      <p className='text-lg text-white'>20</p>
                     </div>
 
@@ -65,6 +81,7 @@ export default function PlayListsDetails() {
         })}
        </div>
          <h1 className='text-3xl text-white font-semibold my-3'>Tracks</h1>
+         
             {data?.map((track, i) => {
                
                return(

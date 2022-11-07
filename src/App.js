@@ -32,8 +32,8 @@ const App = () => {
        const FIRST_USER_ID = userProfiles?.profiles?.items[0]
         const DEFAULT_USER_ID = data?.defaultProfile
 
-          console.log("the first user id", FIRST_USER_ID?.id)
-          console.log("the current user account", account)
+          //console.log("the first user id", FIRST_USER_ID?.id)
+         // console.log("the current user account", account)
        
   return (
     <div className="relative flex">
@@ -50,7 +50,7 @@ const App = () => {
               <Route path="/around-you" element={<AroundYou />} />
                <Route path='/playlists'  element={<PlayLists />}           />
               <Route path='/upload' element = {<UploadMusic  />}      />
-              <Route path='/settings' element = {<Settings />}      />
+              <Route path='/settings' element = {<Settings latestSongs ={latestSongs} isLatestSongsLoading ={isLatestSongsLoading}isLatestSongsError ={isLatestSongsError}  />}      />
               <Route path="/artists/:id" element={<ArtistDetails firstUserId = {FIRST_USER_ID} defaultProfile = {DEFAULT_USER_ID} />} />
               <Route  path='/playlists/:playListId'     element={<PlayListsDetails />}            />
               <Route path="/songs/:songid" element={<SongDetails firstUserId = {FIRST_USER_ID} defaultProfile = {DEFAULT_USER_ID}  />} />

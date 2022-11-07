@@ -5,10 +5,10 @@ export const useGetApprovedAmount = (currency, collectModules) => {
     const {data : approvedAmount, loading : isApprovedAmountLoading, error : isApprovedAmountError} = useQuery(GET_APPROVED_MODULE_AMOUNT, {
         variables : {
             request : {
-                currencies : currency,
-                collectModules: [collectModules],
-                followModules: ["FeeFollowModule", "RevertFollowModule", "ProfileFollowModule"],
-                referenceModules: ["FollowerOnlyReferenceModule"]
+                currencies : [currency],
+                collectModules: ["LimitedFeeCollectModule", "FeeCollectModule", "LimitedTimedFeeCollectModule", "TimedFeeCollectModule",  ],
+               // followModules: ["FeeFollowModule", "RevertFollowModule", "ProfileFollowModule"],
+               // referenceModules: ["FollowerOnlyReferenceModule"]
             }
         }
     })
