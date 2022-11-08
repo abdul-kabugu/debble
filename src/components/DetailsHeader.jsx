@@ -8,7 +8,7 @@ import Modal from './Modals/Modal';
 import { AiOutlineClose, AiOutlineFileAdd, AiOutlineUser } from 'react-icons/ai';
 import { GiLoveSong } from 'react-icons/gi';
 import { useCollect, useMirror } from '../hooks/useLens';
-import moment from 'moment'
+//import moment from 'moment'
 
 const DetailsHeader = ({song, defaultProfile, firstUserId, songRevenueStats }) => {
   const [isCollectModal, setisCollectModal] = useState(false)
@@ -72,7 +72,7 @@ const DetailsHeader = ({song, defaultProfile, firstUserId, songRevenueStats }) =
       </div>
         }
       }
-      const formattedDates = moment(song?.publication?.collectModule?.endTimestamp).format('MMMM Do YYYY, h:mm:ss a')
+    //  const formattedDates = moment(song?.publication?.collectModule?.endTimestamp).format('MMMM Do YYYY, h:mm:ss a')
       
   console.log("the song from header component", song)
   return(
@@ -149,7 +149,7 @@ const DetailsHeader = ({song, defaultProfile, firstUserId, songRevenueStats }) =
           />
            <h3 className='text-white font-semibold text-lg mx-4 capitalize'>end time :</h3>
 
-           <p className='text-white'>{formattedDates}</p>
+           <p className='text-white'>{song?.publication?.collectModule?.endTimestamp}</p>
             
         </div>
  : ""}
