@@ -8,7 +8,7 @@ import TrackBar from '../components/TrackBar'
 import { useQuery } from '@apollo/client'
 import { TEST_GET_PUB } from '../graphql/query/testgetsongs'
 import { useHandleApproveModule } from '../hooks/useHandleApproveModule'
-
+import HashLoader from 'react-spinners/HashLoader'
   
 const SongDetails = ({firstUserId, defaultProfile}) => {
  
@@ -42,7 +42,9 @@ const SongDetails = ({firstUserId, defaultProfile}) => {
 
        if(isLatestSongsLoading || isSongReveneuStatsLoading || isSongDetailsLoading){
         return(
-          <h3 className='text-white'>Some info is still loading</h3>
+          <div className='w-full h-screen flex items-center justify-center'>
+            <HashLoader color="#36d7b7" />
+          </div>
         )
        } 
 
@@ -58,13 +60,14 @@ const SongDetails = ({firstUserId, defaultProfile}) => {
    
     <div className='mb-6'>
       <h1 className='text-white text-2xl font-bold mt-3' >Tracks</h1>
-      <button className='bg-black text-white' onClick={() => approveModule ()}>approval  module</button>
+    
       {songDetail?.publication.metadata.media?.map((track, i) => {
 
           return(
                <TrackBar 
                  key={i}
                  song = {track} 
+                  fullSong = {songDetail}
                  data = {songDetail}
                   isPlaying = {isPlaying}
                   activeSong = {activeSong}

@@ -10,7 +10,7 @@ import { useNewMoralisObject , useMoralis, useMoralisQuery} from 'react-moralis'
 import Modal from './Modals/Modal'
 import { useSelector } from 'react-redux'
 import { AiOutlineClose } from 'react-icons/ai'
-export default function TrackBar({song, activeSong,  data, i, isPlaying}) {
+export default function TrackBar({song, activeSong,  data, i, isPlaying, fullSong}) {
   const [currentSong, setcurrentSong] = useState()
    const [isPlayListModalOpen, setisPlayListModalOpen] = useState(false)
    const [isAddNewPlayList, setisAddNewPlayList] = useState(false)
@@ -32,7 +32,7 @@ export default function TrackBar({song, activeSong,  data, i, isPlaying}) {
           setcurrentSong(track)
          setisPlayListModalOpen(true)
        }
-     console.log("ponted track", currentSong)
+     console.log("ponted track", song)
         
       
      const  handleSelectedPlayList =  async (song) =>  {
@@ -117,7 +117,7 @@ export default function TrackBar({song, activeSong,  data, i, isPlaying}) {
         <div className="flex flex-1 flex-row justify-between  items-center">
         <img  src={song?.original?.cover || song?.metadata?.image} alt={song?.original?.altTag} className="w-10 h-10 rounded-lg"  />
         <div className="flex-1 flex-col flex justifuy-center mx-3">
-        <p className="text-lg  text-gray-300 font-bold ">{ song?.original?.altTag ? truncateString(song && song?.original?.altTag, 10) :  truncateString(song && song?.metadata?.name, 10)}</p>
+        <p className="text-lg  text-gray-300 font-bold ">{ song?.original?.altTag ? truncateString(song && song?.original?.altTag, 10) :  truncateString(song && fullSong?.publication?.metadata?.name, 10)}</p>
       {/*}  <div className="flex flex-row">
         <p className="text-ase  text-white font-bold truncate ">{song?.profile.name || song?.profile.handle}</p>
 
