@@ -112,6 +112,7 @@ const NavLinks = ({handleClick}) => (
   bg-black overflow-y-scroll hide-scrollbar 
  '>
   <BiMusic  className='text-white w-full' size={50}/>
+  {/*<img src='img/logo-2.png'  className='w-[60px]'  />*/}
   <NavLinks  />
 
   <div className='mt-1 '>

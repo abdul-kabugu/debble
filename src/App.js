@@ -47,7 +47,7 @@ const App = () => {
               <Route path="/" element={<Discover />} />
               <Route path="/top-artists" element={<TopArtists />} />
               <Route path="/myplalists" element={<UserPlayLists />} />
-              <Route path="/around-you" element={<AroundYou />} />
+              <Route path="/podcasts" element={<AroundYou />} />
                <Route path='/playlists'  element={<PlayLists />}           />
               <Route path='/upload' element = {<UploadMusic  />}      />
               <Route path='/settings' element = {<Settings latestSongs ={latestSongs} isLatestSongsLoading ={isLatestSongsLoading}isLatestSongsError ={isLatestSongsError}  />}      />

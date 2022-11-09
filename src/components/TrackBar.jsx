@@ -32,17 +32,17 @@ export default function TrackBar({song, activeSong,  data, i, isPlaying, fullSon
           setcurrentSong(track)
          setisPlayListModalOpen(true)
        }
-     console.log("ponted track", song)
+     //console.log("ponted track", song)
         
       
      const  handleSelectedPlayList =  async (song) =>  {
            setcurrentSelectedPlayList(song)
             setarrayOfSongs(song?.attributes?.Song)
-            console.log("the array  of  songs", arrayOfSongs)
+           // console.log("the array  of  songs", arrayOfSongs)
             song.add("Song", currentSong)
             await  song.save()
 
-             console.log(song)
+            // console.log(song)
              
           
      }
@@ -70,9 +70,9 @@ export default function TrackBar({song, activeSong,  data, i, isPlaying, fullSon
      //console.log("current selected Plalist", currentSelectedPlayList)
 
 
-       
+        //console.log("the song", song)
      const dispatch = useDispatch()
-     console.log("current  user  playLists", userPlayList)
+     //console.log("current  user  playLists", userPlayList)
      
      const handlePauseClick = () => {
       dispatch(playPause(false))
@@ -117,7 +117,7 @@ export default function TrackBar({song, activeSong,  data, i, isPlaying, fullSon
         <div className="flex flex-1 flex-row justify-between  items-center">
         <img  src={song?.original?.cover || song?.metadata?.image} alt={song?.original?.altTag} className="w-10 h-10 rounded-lg"  />
         <div className="flex-1 flex-col flex justifuy-center mx-3">
-        <p className="text-lg  text-gray-300 font-bold ">{ song?.original?.altTag ? truncateString(song && song?.original?.altTag, 10) :  truncateString(song && fullSong?.publication?.metadata?.name, 10)}</p>
+        <p className="text-lg  text-gray-300 font-bold ">{ song?.original?.altTag ? truncateString(song && song?.original?.altTag, 10) :  truncateString(song && song?.metadata?.name, 10)}</p>
       {/*}  <div className="flex flex-row">
         <p className="text-ase  text-white font-bold truncate ">{song?.profile.name || song?.profile.handle}</p>
 

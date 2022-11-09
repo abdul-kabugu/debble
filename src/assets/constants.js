@@ -3,6 +3,8 @@ import {TbPlaylist} from 'react-icons/tb'
 import {BsCloudUpload} from 'react-icons/bs'
 import {GiMoneyStack} from 'react-icons/gi'
 import {BiTimeFive} from 'react-icons/bi'
+import {MdPodcasts} from 'react-icons/md'
+
 export const genres = [
   { title: 'Pop', value: 'POP' },
   { title: 'Hip-Hop', value: 'HIP_HOP_RAP' },
@@ -22,7 +24,7 @@ export const genres = [
 
 export const links = [
   { name: 'Discover', to: '/', icon: HiOutlineHome },
-  { name: 'Around You', to: '/around-you', icon: HiOutlinePhotograph },
+  { name: 'Podcasts', to: '/podcasts', icon: MdPodcasts },
   { name: 'PlayLists', to: '/playlists', icon: TbPlaylist },
   { name: 'My PlayLists', to: '/myplalists', icon: TbPlaylist },
   { name: 'New Song', to: '/upload', icon: BsCloudUpload },

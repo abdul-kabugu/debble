@@ -36,7 +36,7 @@ export default function PlayListsDetails() {
          )
       
      }
-      const shareUrl = `http://localhost:3000/playlists/${playListId}`
+      const shareUrl = `https://audax-nu.vercel.app/playlists/${playListId}`
   return (
     <div>
        <div className='w-full h-4/5 p-3 md:h-56  bg-gradient-to-r from-indigo-500 to-purple-400 '>
