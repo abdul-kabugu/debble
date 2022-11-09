@@ -8,7 +8,7 @@ import { ArtistDetails, TopArtists, AroundYou, Discover, Search, SongDetails, To
 import UploadMusic from './pages/UploadMusic';
 import PlayLists from './pages/PlayLists';
 import UserPlayLists from './pages/UserPlayLists';
-
+import  Helmet from  'react-helmet'
 
 const App = () => {
   const { activeSong } = useSelector((state) => state.player);
@@ -36,6 +36,17 @@ const App = () => {
          // console.log("the current user account", account)
        
   return (
+    <>
+     <main>
+      <Helmet>
+      <title>Audax | Web3 Music Platform</title>
+<meta name="description" content="Audax is Decentralized music streaming  platform where you can  discover and invest to your favorite creators" />
+{/*<!-- Google / Search Engine Tags -->*/}
+<meta itemprop="name" content="Audax | Web3 Music Platform" />
+<meta itemprop="description" content="Audax is Decentralized music streaming  platform where you can  discover and invest to your favorite creators" />
+<meta itemprop="image" content="https://i.ibb.co/XtY7JDt/logo-2.png" />
+      </Helmet>
+     </main>
     <div className="relative flex">
       <Sidebar firstUserId = {FIRST_USER_ID} defaultProfile = {DEFAULT_USER_ID}  />
       <div className="flex-1 flex flex-col bg-gradient-to-br from-black to-[#121286] h-min ">
@@ -75,7 +86,9 @@ const App = () => {
         </div>
       )}
     </div>
+    </>
   );
+ 
 };
 
 export default App;
