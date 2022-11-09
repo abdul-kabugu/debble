@@ -8,7 +8,7 @@ import {GET_ARTIST_SONGS} from '../../graphql/query/getArtistSongs'
                 "profileId": id,
                 "publicationTypes": ["POST",  "MIRROR"],
                  
-                "sources": ["audios"]
+                "sources":  ["audaxhack"]   //["audios"]
             }
         }
     })
