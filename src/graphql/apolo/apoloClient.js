@@ -32,7 +32,7 @@ import {
         )
         //alert( `[GraphQL error]: Message: ${message}, Location: ${locations}, Path: ${path}`)
       );
-    if (networkError) alert(`[Network error]: ${networkError}`);
+    if (networkError) console.log(`[Network error]: ${networkError}`);
   });
   
   const httpLink = from ([

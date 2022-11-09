@@ -1,7 +1,8 @@
 import omitDeep from 'omit-deep';
 import { ethers, utils } from 'ethers';
 
-export const ethersProvider = new ethers.providers.Web3Provider(window.ethereum);
+ 
+export const ethersProvider =  new ethers.providers.Web3Provider(window.ethereum);
 
 
   export const signText = (text) => {

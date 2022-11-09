@@ -6,5 +6,5 @@ import  LENS_HUB from "../abi/LENS_HUB.json"
 export const lensHub = new ethers.Contract(
     MUMBAI_CONTRACT_ADDRESS,
     LENS_HUB,
-    getSigner()
+     getSigner()
   )
