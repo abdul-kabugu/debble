@@ -52,7 +52,7 @@ export const useFollow = () => {
               //return tx.hash;
             
             } catch (error) {
-                console.log("this erro from follow", error)
+                alert(error)
             }
     }
 

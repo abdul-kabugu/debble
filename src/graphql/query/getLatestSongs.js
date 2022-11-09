@@ -6,7 +6,7 @@ query ExplorePublications {
       sortCriteria: LATEST,
       publicationTypes: [POST, MIRROR],
       limit: 5
-      sources: [audios]
+      sources: [audaxhack]
     }) {
       items {
         __typename 

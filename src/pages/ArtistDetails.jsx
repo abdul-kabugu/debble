@@ -5,7 +5,7 @@ import { truncateString } from "../hooks/useSubString";
 import { AlbumCard } from "../components";
 import {useQuery} from '@apollo/client'
 import { TEST_GET_PUB } from "../graphql/query/testgetsongs";
-
+import HashLoader from 'react-spinners/HashLoader'
 
 const ArtistDetails = () => {
      
@@ -18,14 +18,16 @@ const ArtistDetails = () => {
    
        if (isGetArtistSongsLoading || isArtistProfileLoading) {
         return(
-          <h3 className="text-white">Some Info is loading</h3>
+          <div className='w-full h-screen flex items-center justify-center'>
+            <HashLoader color="#36d7b7" />
+          </div>
         )
        }
 
        if(isArtistProfileError || isGetArtistSongsError){
         return(
           <div className='w-full h-screen flex items-center justify-center'>
-          <h1 className='text-white font-semibold text-3xl'>Something went wrong please refresh </h1>
+          <h1 className='text-white font-semibold text-3xl'>Something went wrong please check your connection & refresh </h1>
        </div>
         )
        }

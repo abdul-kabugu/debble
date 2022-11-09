@@ -22,7 +22,7 @@ export default function UploadMusic() {
   const [refferlFee, setrefferalFee] = useState("")
   const [collectRules, setcollectRules] = useState(false)
   const [dropsSupply, setdropsSupply] = useState("")
-  const [dropTags, setdropTags] = useState(["hellow"])
+  const [dropTags, setdropTags] = useState([])
   const [mirrorRules, setmirrorRules] = useState(false)
   const [selectedAlbumCoverUri, setselectedAlbumCoverUri] = useState("")
   const [selectedAudioUri, setselectedAudioUri] = useState("")
@@ -226,7 +226,7 @@ const getPostRefrenceModule = () => {
                  onClick={() => uploadSong(description, albumName, dropTags, selectedAlbumCoverUri, AlbumArray, getPostModules, getPostRefrenceModule)}
                 
                 
-                >create post</button>
+                >Upload song</button>
         ): (
           <button className='py-2 px-8 bg-white/75 capitalize cursor-pointer rounded-md' onClick={nextStep}>next</button>
         )}

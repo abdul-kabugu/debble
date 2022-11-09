@@ -140,6 +140,7 @@ export default function FirstStep({
           placeholder='Enter album  name ' 
            value={albumName}
            onChange={e => setalbumName(e.target.value)}
+           required
         />
         </div>
 
