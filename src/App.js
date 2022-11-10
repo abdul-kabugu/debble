@@ -1,9 +1,9 @@
 import { useSelector } from 'react-redux';
 import { Route, Routes } from 'react-router-dom';
-import {useEffect} from 'react'
+import {useState} from 'react'
 import { useMoralis } from 'react-moralis';
 import {useGetLatestSongs, useGetUserProfiles, useGetDefaultId} from './hooks/useLens'
-import { Searchbar, Sidebar, MusicPlayer, TopPlay } from './components';
+import { Searchbar, Sidebar, MusicPlayer, TopPlay, Announcement } from './components';
 import { ArtistDetails, TopArtists, AroundYou, Discover, Search, SongDetails, TopCharts, Settings, PlayListsDetails } from './pages';
 import UploadMusic from './pages/UploadMusic';
 import PlayLists from './pages/PlayLists';
@@ -11,6 +11,7 @@ import UserPlayLists from './pages/UserPlayLists';
 import  Helmet from  'react-helmet'
 
 const App = () => {
+  const [isShowAnnouncement, setisShowAnnouncement] = useState(true)
   const { activeSong } = useSelector((state) => state.player);
   const {isWeb3Enabled, enableWeb3, account, user, isAuthenticated} = useMoralis()
   /*useEffect(() => {
@@ -34,6 +35,10 @@ const App = () => {
 
           //console.log("the first user id", FIRST_USER_ID?.id)
          // console.log("the current user account", account)
+
+           const handleToggleAnnouncement = () => {
+            isShowAnnouncement ? setisShowAnnouncement(false) : setisShowAnnouncement(true)
+           }
        
   return (
     <>
@@ -51,9 +56,10 @@ const App = () => {
       <Sidebar firstUserId = {FIRST_USER_ID} defaultProfile = {DEFAULT_USER_ID}  />
       <div className="flex-1 flex flex-col bg-gradient-to-br from-black to-[#121286] h-min ">
         <Searchbar   />
-
+        {isShowAnnouncement && <Announcement handleToggleAnnouncement = {handleToggleAnnouncement} />}
         <div className="px-6 h-[calc(100vh-1px)] overflow-y-scroll hide-scrollbar flex xl:flex-row flex-col-reverse">
           <div className="flex-1 h-fit pb-40">
+            
             <Routes>
               <Route path="/" element={<Discover />} />
               <Route path="/top-artists" element={<TopArtists />} />

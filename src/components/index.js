@@ -14,6 +14,7 @@ import Authenticate from './Authenticate';
 import Modal from './Modals/Modal';
 import TrackBar from './TrackBar';
 import PlayListPlayPause from './PlayListPlayPause';
+import Announcement from './Announcement';
 
 export {
   TopPlay,
@@ -31,5 +32,6 @@ export {
   Authenticate,
   Modal,
   TrackBar,
-  PlayListPlayPause
+  PlayListPlayPause,
+  Announcement
 };
