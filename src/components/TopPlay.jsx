@@ -111,7 +111,7 @@ const handlePauseClick = () => {
           <SwiperSlide key={i} style={{width : "20%",}}
             className='shadow-lg rounded-full animate-sliderright'
           >
-         <Link to={`/${artist?.id}`}>
+         <Link to={`artists/${artist?.id}`}>
           <img  src={artist?.picture?.original?.url} alt={artist?.name || artist?.handle} 
             className="rounded-full object-cover w-full"
           />

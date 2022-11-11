@@ -6,7 +6,7 @@ import {v4 as uuidv4} from 'uuid'
 import { useMoralis,  useMoralisFile} from 'react-moralis'
 import { lensHub } from '../utils/lens-hub'
 import { useGetUserProfiles } from './useLens'
-
+import {toast} from 'react-toastify'
 
 const CREATE_POST_TYPED_DATA = `
   mutation($request: CreatePublicPostRequest!) { 
@@ -138,7 +138,11 @@ const  useSongUploader = () => {
         // you can look at how to know when its been indexed here: 
         //   - https://docs.lens.dev/docs/has-transaction-been-indexed
         }catch (error)  {
-          alert(error)
+          //alert(error)
+          toast(error.message, {
+            position: toast.POSITION.BOTTOM_RIGHT,
+            
+          })
         }
           
         

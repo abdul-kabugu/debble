@@ -3,7 +3,7 @@ import {lensHub} from '../../utils/lens-hub'
 import {signText, signedTypeData, splitSignature} from '../../utils/ether-service'
 import { apolloClient } from '../../graphql/apolo/apoloClient'
 import { MIRROR_SONG } from '../../graphql/query/mirrorSong'
-
+import {toast} from 'react-toastify'
   // TODO types
 const createMirrorTypedData = (createMirrorTypedDataRequest) => {
     return apolloClient.mutate({
@@ -50,7 +50,11 @@ const createMirrorTypedData = (createMirrorTypedDataRequest) => {
               },
             });
           } catch (error) {
-              alert(error)
+              //alert(error)
+              toast(error.message, {
+                position: toast.POSITION.BOTTOM_RIGHT,
+                
+              })
           }
       }
 

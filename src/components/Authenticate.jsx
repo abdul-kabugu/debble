@@ -110,19 +110,29 @@ export default function Authenticate({ firstUserId , defaultProfile }) {
          }
        }
 
+
+         const handleLogIn = async () => {
+           await authenticate()
+           setisConnectWalletModal(false)
+         }
+
+           const handleLogInWithLens = async  () => {
+             await logIn()
+              setisLensConnectModal(false)
+           }
   return (
     <div className='overflow-y-scroll hide-scrollbar'>
      {getCurrentAuthState()}
       
     
-    {isConnectWalletModal && <Modal>
+    {isConnectWalletModal  && <Modal>
         <div className='lg:min-w-[400px]'>
             <div className='flex flex-col items-center justify-center'>
                 <BsPatchCheck  size={35}  />
                  <h3 className='text-white text-2xl font-semibold '>Connect your wallet</h3>
             </div>
 
-             <div className='my-3 flex justify-between sm:flex-col sm:items-center sm:justify-center lg:flex-row ' onClick={() => authenticate()}>
+             <div className='my-3 flex justify-between sm:flex-col sm:items-center sm:justify-center lg:flex-row ' onClick={() => handleLogIn()}>
                 <div className='flex flex-col w-[120px]  lg:w-[90px] items-center justify-center cursor-pointer sm:my-3'>
                     <img    src='/img/metamask.svg' alt='metamask logo'  className='w-[100px] lg:max-w-[50px] md:max-w-[30px]' />
                      <h5 className='text-white font-semibold capitalize text-center  text-white/70 md:text-sm'>metamask</h5>
@@ -173,7 +183,7 @@ export default function Authenticate({ firstUserId , defaultProfile }) {
             </div>
 
             <div className='flex items-center justify-end'>
-               <button className='bg-white text-black capitalize py-2 w-[150px] px-6 rounded-lg ' onClick={logIn}>sign-in</button>
+               <button className='bg-white text-black capitalize py-2 w-[150px] px-6 rounded-lg ' onClick={() => handleLogInWithLens()}>sign-in</button>
             </div>
         </div>
     

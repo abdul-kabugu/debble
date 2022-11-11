@@ -23,13 +23,21 @@ export default function Settings({latestSongs, isLatestSongsLoading, isLatestSon
           )
        }
 
-         if(isUserProfileError || isLatestSongsError || isTopArtistsError){
+         if( isLatestSongsError || isTopArtistsError){
              return(
               <div className='w-[100vw] h-screen flex items-center justify-center'>
                   <h3 className='text-xl font-semibold text-white capitalize'>Something  went  wrong  please check  your  connection and try again</h3>
               </div>
              ) 
          }
+
+          if(isUserProfileError ){
+            return(
+              <div className='w-[100vw] h-screen flex items-center justify-center'>
+                  <h3 className='text-xl font-semibold text-white capitalize'>Make  Sure  You've Signed-in with  Lens  And You Own  lens handle</h3>
+              </div>
+            )
+          }
   return (
     <div className='w=[100%] border rounded-lg p-3 border-gray-800 '>
         <div className='my-6'>

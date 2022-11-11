@@ -3,7 +3,7 @@ import {lensHub} from '../../utils/lens-hub'
 import {signText, signedTypeData, splitSignature} from '../../utils/ether-service'
 import { apolloClient } from '../../graphql/apolo/apoloClient'
 import { FOLLOW_ARTIST } from '../../graphql/query/followArtists'
-
+import {toast} from 'react-toastify'
 
 
  // TODO sort typed!
@@ -52,7 +52,11 @@ export const useFollow = () => {
               //return tx.hash;
             
             } catch (error) {
-                alert(error)
+               // alert(error)
+               toast(error.message, {
+                position: toast.POSITION.BOTTOM_RIGHT,
+                
+              })
             }
     }
 

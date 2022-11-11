@@ -9,6 +9,7 @@ import UploadMusic from './pages/UploadMusic';
 import PlayLists from './pages/PlayLists';
 import UserPlayLists from './pages/UserPlayLists';
 import  Helmet from  'react-helmet'
+import {ToastContainer} from 'react-toastify'
 
 const App = () => {
   const [isShowAnnouncement, setisShowAnnouncement] = useState(true)
@@ -56,6 +57,7 @@ const App = () => {
       <Sidebar firstUserId = {FIRST_USER_ID} defaultProfile = {DEFAULT_USER_ID}  />
       <div className="flex-1 flex flex-col bg-gradient-to-br from-black to-[#121286] h-min ">
         <Searchbar   />
+        <ToastContainer />
         {isShowAnnouncement && <Announcement handleToggleAnnouncement = {handleToggleAnnouncement} />}
         <div className="px-6 h-[calc(100vh-1px)] overflow-y-scroll hide-scrollbar flex xl:flex-row flex-col-reverse">
           <div className="flex-1 h-fit pb-40">

@@ -2,7 +2,7 @@ import {useMoralis} from 'react-moralis'
 import {apolloClient} from '../graphql/apolo/apoloClient'
 import {signText, } from '../utils/ether-service'
 import {gql} from '@apollo/client'
-
+import {toast} from 'react-toastify'
 
 
 // request challeng
@@ -67,7 +67,11 @@ const useSignIn  = () => {
         window.sessionStorage.setItem('accessToken', accessToken);
           
       } catch (error) {
-        console.error(error);
+        //console.error(error);
+        toast(error.message, {
+          position: toast.POSITION.BOTTOM_RIGHT,
+          
+        })
       
       }
      }

@@ -12,6 +12,8 @@ import { AiOutlineClose } from 'react-icons/ai'
 import { useNewMoralisObject, useMoralis } from 'react-moralis'
 import {useSelector} from 'react-redux'
 import HashLoader from 'react-spinners/HashLoader'
+import {toast, ToastContainer} from 'react-toastify'
+import "react-toastify/dist/ReactToastify.css";
 const Sidebar = ({firstUserId, defaultProfile }) => {
 const [isMobileMenuOpen, setisMobileMenuOpen] = useState(false)
 const [isCreatePlaylistModal, setisCreatePlaylistModal] = useState(false)
@@ -38,6 +40,8 @@ const toggleIsCreatePlaylistModal = () => {
            "Song" : theTargetedSong
      }
 
+     const notify = () => toast("Wow so easy!")
+
 const NavLinks = ({handleClick}) => (
   <div className='mt-4'>
     {links.map((link, i) => {
@@ -58,9 +62,12 @@ const NavLinks = ({handleClick}) => (
      <div className="text-sm my-8 flex flex-row justify-start items-center font-medium text-gray-400 hover:text-cyan-400 cursor-pointer"  onClick={toggleIsCreatePlaylistModal}>
      <VscAdd className='text-white w-5 h-6 mr-2' />
      <p className=' capitalize'>create playlist</p>
+ 
     </div>
    ) :
-   <div className="text-sm my-8 flex flex-row justify-start items-center font-medium text-gray-400 hover:text-cyan-400 cursor-pointer"  >
+   <div className="text-sm my-8 flex flex-row justify-start items-center font-medium text-gray-400 hover:text-cyan-400 cursor-pointer" onClick={() => toast.error("There Is No active song, play song ", {
+    position: toast.POSITION.BOTTOM_RIGHT
+  })} >
    <VscAdd className='text-white w-5 h-6 mr-2' />
    <p className=' capitalize'>create playlist</p>
   </div>

@@ -24,13 +24,21 @@ const ArtistDetails = () => {
         )
        }
 
-       if(isArtistProfileError || isGetArtistSongsError){
+       if(  isGetArtistSongsError){
         return(
           <div className='w-full h-screen flex items-center justify-center'>
           <h1 className='text-white font-semibold text-3xl'>Something went wrong please check your connection & refresh </h1>
        </div>
         )
        }
+
+        if(isArtistProfileError){
+          return(
+            <div className='w-full h-screen flex items-center justify-center'>
+            <h1 className='text-white font-semibold text-3xl'>Error :  Make  Sure  You've Signed-In  with Lens- protocol And Your  address  holds  Lens  Handle </h1>
+         </div> 
+          )
+        }
    return(
   <div className="w-full">
      <div className="artist_bg">
